@@ -1,0 +1,10 @@
+## 跟踪滑动窗口与生命周期配置（可根据场景调整）
+
+tracker:
+  max_window_size: 30        # 滑动窗口最大长度（按条目数；超过后旧数据滚动淘汰）
+  frame_window_span: 30      # 帧号裁剪窗口（只保留最近 N 帧内的数据；为空则禁用按帧裁剪）
+
+  ttl: 10                    # 轨迹窗口超时（秒），超时未更新则清理
+  snapshot_interval: 30      # 快照保存间隔（秒）
+  save_dir: track_logs       # 轨迹窗口日志/快照目录
+

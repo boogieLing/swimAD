@@ -1,0 +1,28 @@
+# model = "models/yolov8n.pt"
+YOLO_MODEL = "models/best_0928.pt"
+FREQUENCY = 7
+SOURCE_FILE = "source"
+WATCH_CLIENT_FILE = "watch_client"
+
+TRACKERS = ['bytetrack', 'botsort', 'strongsort', 'ocsort', 'deepocsort', 'hybridsort', 'imprassoc', 'boosttrack']
+
+MAIN_VIEW = 'MAIN'
+HEIGHT = 1440
+WIDTH = 2560
+
+POOL_WIDTH = 1500
+POOL_HEIGHT = 2500
+MARGIN_WIDTH = 300
+MARGIN_HEIGHT = 300
+OVERLAP_WIDTH = 200
+OVERLAP_HEIGHT = 200
+
+CONFIG_BASE_PATH = "config"
+TRACKER_CONFIGS = CONFIG_BASE_PATH
+
+TRACK_LIFECYCLE_TTL = 10
+TRACK_LIFECYCLE_SNAP_INTERVAL = 30
+TRACK_LIFECYCLE_WINDOWS_SPAN = 30
+TRACKER_LOG_PATH = CONFIG_BASE_PATH + "/tracker_log"
+
+MODEL_BASE_PATH = "models"

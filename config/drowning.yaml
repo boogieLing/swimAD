@@ -1,0 +1,35 @@
+## 溺水检测规则配置（支持通过修改阈值进行调参，而无需改动代码）
+
+drowning:
+  # 预处理相关
+  use_original_bbox: false   # 是否使用原始图像坐标（true=原图 bbox，false=投影后的 bbox）
+  fps: 20                    # 初始帧率估计（检测器会按轨迹动态估计）
+
+  # 评估门槛（不满足则跳过本次评估）
+  min_observations: 5        # 最少观测数
+  min_duration_s: 2.0        # 轨迹最短时长（秒）
+  required_rule_count: 5     # 触发告警所需的最少规则数（如误报多可调高）
+  enable_drop_event_single: true  # 是否允许“突降事件”（Rule 5）单独触发告警
+
+  # 各规则阈值
+  thresholds:
+    head_underwater_ratio: 0.7     # 规则1：水下比例阈值（>= 触发）
+    velocity:                      # 规则2：速度/加速度阈值（均低于触发）
+      mean_v_lt: 0.2
+      mean_a_lt: 0.1
+    jitter_angle_gt: 0.4           # 规则3：抖动角度阈值（弧度，> 触发）
+    underwater_streak_s: 5.0       # 规则4：最大连续水下时长阈值（秒，>= 触发）；误报多时适当调大
+    drop_event:                    # 规则5：掉落事件（前/后半程水下比例）
+      first_half_underwater_ratio_lt: 0.2   # 前半段水下比例 < 该值
+      second_half_underwater_ratio_gte: 0.9 # 后半段水下比例 >= 该值
+    position_variance_le: 0.1      # 规则6：位置方差阈值（<= 触发）
+    repeat_location:               # 规则7：重复位置（网格化计数）
+      grid_size: 0.1               # 网格尺寸（基于投影坐标的单位）
+      min_visits_per_cell: 2       # 单个网格被视为“重复”的最少访问次数
+      min_repeated_cells: 3        # 触发所需的“重复网格”数量
+    direction_change_angle_gt: 1.0 # 规则8：平均方向变化阈值（弧度，> 触发）
+    path_ratio_gt: 2.5             # 规则9：路径/位移比阈值（> 触发）
+
+  # 数值稳定性参数
+  eps:
+    zero_disp: 1e-5                # 近似零位移的判断阈值

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket视频流</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script>
+        const ws = new WebSocket("ws://localhost:8888/video");
+        ws.binaryType = "arraybuffer";  // 关键配置
+        ws.onopen = () => {
+            console.log("WebSocket连接已建立");
+            ws.send("1")
+        };
+        ws.onmessage = (e) => {
+            const blob = new Blob([e.data], {type: "image/jpeg"});
+            const url = URL.createObjectURL(blob);
+            document.getElementById("video").src = url;
+        };
+        ws.onclose = () => {
+            console.log("连接已关闭");
+        };
+
+
+        const ws1 = new WebSocket("ws://localhost:8888/video");
+        ws1.binaryType = "arraybuffer";  // 关键配置
+        ws1.onopen = () => {
+            console.log("WebSocket连接已建立");
+            ws1.send("2")
+        };
+        ws1.onmessage = (e) => {
+            const blob = new Blob([e.data], {type: "image/jpeg"});
+            const url = URL.createObjectURL(blob);
+            document.getElementById("video1").src = url;
+        };
+        ws1.onclose = () => {
+            console.log("连接已关闭");
+        };
+
+        const ws2 = new WebSocket("ws://localhost:8888/video");
+        ws2.binaryType = "arraybuffer";  // 关键配置
+        ws2.onopen = () => {
+            console.log("WebSocket连接已建立");
+            ws2.send("3")
+        };
+        ws2.onmessage = (e) => {
+            const blob = new Blob([e.data], {type: "image/jpeg"});
+            const url = URL.createObjectURL(blob);
+            document.getElementById("video2").src = url;
+        };
+        ws2.onclose = () => {
+            console.log("连接已关闭");
+        };
+
+        const ws3 = new WebSocket("ws://localhost:8888/video");
+        ws3.binaryType = "arraybuffer";  // 关键配置
+        ws3.onopen = () => {
+            console.log("WebSocket连接已建立");
+            ws3.send("4")
+        };
+        ws3.onmessage = (e) => {
+            const blob = new Blob([e.data], {type: "image/jpeg"});
+            const url = URL.createObjectURL(blob);
+            document.getElementById("video3").src = url;
+        };
+        ws3.onclose = () => {
+            console.log("连接已关闭");
+        };
+    </script>
+</head>
+<body>
+    <img id="video" width="768" height="432">
+    <img id="video1" width="768" height="432">
+    <img id="video2" width="768" height="432">
+    <img id="video3" width="768" height="432">
+</body>
+</html>

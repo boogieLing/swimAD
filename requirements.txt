@@ -1,0 +1,14 @@
+tornado~=6.5
+opencv-python~=4.5
+ultralytics~=8.0
+numpy
+pandas~=2.3.1
+torch~=2.7.1
+pyyaml~=6.0.2
+scikit-learn
+loguru
+gdown
+ftfy
+regex
+filterpy
+websockets
